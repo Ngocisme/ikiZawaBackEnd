@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LocationCityController;
 use App\Http\Controllers\LocationDistrictController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +26,14 @@ Route::apiResource('locationDistrict', LocationDistrictController::class);
 
 // ** Khúc này của bảng hotel
 Route::apiResource('hotel', HotelController::class);
+
+
+// ** Khúc này của bảng hotel
+Route::apiResource('room', RoomController::class);
+
+// ** Khúc này của bảng booking
+Route::apiResource('booking', BookingController::class);
+
+// ** php artisan make:controller
+// ** php artisan make:model
+// ** php artisan make:resource
