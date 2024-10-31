@@ -4,6 +4,8 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LocationCityController;
 use App\Http\Controllers\LocationDistrictController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +35,12 @@ Route::apiResource('room', RoomController::class);
 
 // ** Khúc này của bảng booking
 Route::apiResource('booking', BookingController::class);
+
+// ** Khúc này của bảng user login
+Route::apiResource('user/login', LoginController::class);
+
+// ** Khúc này của bảng user logout
+Route::apiResource('user/logout', LogoutController::class);
 
 // ** php artisan make:controller
 // ** php artisan make:model

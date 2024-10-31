@@ -8,7 +8,7 @@ class LocationCityModel extends Model
 {
     //
     protected $table = 'Location_city';
-
+    protected $primaryKey = 'locationCityId';
     protected $fillable = [
         'locationCityId',
         'locationCityName'

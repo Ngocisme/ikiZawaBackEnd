@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\BookingResource;
-use App\Models\BookingModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BookingController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,17 +13,6 @@ class BookingController extends Controller
     public function index()
     {
         //
-        $booking = BookingModel::get();
-        if ($booking->isNotEmpty()) {
-            return BookingResource::collection($booking);
-        } else {
-            return response()->json(
-                [
-                    'message' => 'Không có thông tin booking'
-                ],
-                200
-            );
-        }
     }
 
     /**
@@ -41,6 +29,7 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
