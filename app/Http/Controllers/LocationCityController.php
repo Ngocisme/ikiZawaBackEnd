@@ -12,7 +12,23 @@ class LocationCityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+
+    public function index()
+    {
+        $locationCities = LocationCityModel::get();
+        if ($locationCities->isNotEmpty()) {
+            return LocationCityResource::collection($locationCities);
+        } else {
+            return response()->json(
+                [
+                    'message' => 'Không có dữ liệu nào về thành phố'
+                ],
+                200
+            );
+        }
+    }
+
+    public function getCitiesPage(Request $request)
     {
         //
         $perPage = $request->get('perPage', 10);
@@ -80,7 +96,7 @@ class LocationCityController extends Controller
         return response()->json([
             'message' => 'tạo thành phố thành công',
             'data' => new LocationCityResource($locationCities)
-        ], 200);
+        ], 201);
     }
 
     /**
@@ -112,7 +128,7 @@ class LocationCityController extends Controller
         );
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Thêm dữ liệu thất bại',
+                'message' => 'Cập nhật dữ liệu thất bại',
                 'error' => $validator->messages(),
             ], 422);
         }
@@ -132,9 +148,9 @@ class LocationCityController extends Controller
         );
 
         return response()->json([
-            'message' => 'tạo thành phố thành công',
+            'message' => 'cập nhật thành phố thành công',
             'data' => new LocationCityResource($locationCity)
-        ], 200);
+        ], 201);
     }
 
     /**
@@ -146,6 +162,6 @@ class LocationCityController extends Controller
         $locationCity->delete();
         return response()->json([
             'message' => 'Đã xoá thành công thành phố'
-        ]);
+        ], 200);
     }
 }

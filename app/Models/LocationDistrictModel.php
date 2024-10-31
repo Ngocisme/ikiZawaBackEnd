@@ -8,7 +8,9 @@ class LocationDistrictModel extends Model
 {
     //
     protected $table = 'Location_district';
+    protected $primaryKey = 'locationDistrictId';
     protected $fillable = [
+        'locationDistrictId',
         'locationDistrictName',
         'locationCityId',
     ];
