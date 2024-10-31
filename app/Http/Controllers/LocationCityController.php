@@ -12,12 +12,22 @@ class LocationCityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $locationCities = LocationCityModel::get();
+        $perPage = $request->get('perPage', 10);
+        $locationCities = LocationCityModel::paginate($perPage);
         if ($locationCities->isNotEmpty()) {
-            return LocationCityResource::collection($locationCities);
+            return LocationCityResource::collection($locationCities)->additional(
+                [
+                    'pagination' => [
+                        'current_page' => $locationCities->currentPage(),
+                        'last_page' => $locationCities->lastPage(),
+                        'per_page' => $locationCities->perPage(),
+                        'total' => $locationCities->total(),
+                    ]
+                ]
+            );
         } else {
             return response()->json(
                 [
