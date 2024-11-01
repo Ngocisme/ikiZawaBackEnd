@@ -20,7 +20,15 @@ class HotelResource extends JsonResource
             'địa chỉ khách sạn' => $this->HotelAddress,
             'ngày mở cửa' => $this->OpenDay,
             'trạng thái' => $this->HotelStatus,
-            'quận' => $this->locationDistrictId,
+            'tên quận' => $this->district ? $this->district->locationDistrictName : null,
+            'id quận' => $this->locationDistrictId,
+            'ảnh' => $this->imageHotel->map(function ($img) {
+                return [
+                    'Id ảnh' => $img->HotelImageId,
+                    'Url ảnh' => $img->ImageUrl,
+                    'Mô tả ảnh' => $img->HotelImageDescription,
+                ];
+            })
         ];
     }
 }

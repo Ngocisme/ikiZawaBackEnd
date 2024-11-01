@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\HotelImageController;
 use App\Http\Controllers\LocationCityController;
 use App\Http\Controllers\LocationDistrictController;
 use App\Http\Controllers\LoginController;
@@ -32,8 +33,10 @@ Route::apiResource('locationDistrict', LocationDistrictController::class);
 // ** Khúc này của bảng hotel
 Route::apiResource('hotel', HotelController::class);
 
+// ** Khúc này của bảng image hotel
+Route::apiResource('hotelImg', HotelImageController::class);
 
-// ** Khúc này của bảng hotel
+// ** Khúc này của bảng Room
 Route::apiResource('room', RoomController::class);
 
 // ** Khúc này của bảng booking

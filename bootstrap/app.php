@@ -27,6 +27,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'message' => 'Không tìm thấy id của thành phố.'
                 ], 404);
+            } elseif ($request->is('api/hotel/*')) {
+                return response()->json([
+                    'message' => 'Không tìm thấy id của khách sạn.'
+                ], 404);
             }
         });
     })->create();

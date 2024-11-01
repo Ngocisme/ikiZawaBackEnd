@@ -8,6 +8,7 @@ class HotelModel extends Model
 {
     //
     protected $table = 'Hotel';
+    protected $primaryKey = 'HotelId';
     protected $fillable = [
         'HotelName',
         'HotelAddress',
@@ -16,9 +17,13 @@ class HotelModel extends Model
         'locationDistrictId',
     ];
 
-    // public function district()
-    // {
-    //     return $this->belongsTo(LocationCityModel::class, 'locationDistrictId');
-    // }
-    ///!!!!!! LÁt về thêm model quận rồi thực hiện việc hiển thị
+    public function district()
+    {
+        return $this->belongsTo(LocationDistrictModel::class, 'locationDistrictId', 'locationDistrictId');
+    }
+
+    public function imageHotel()
+    {
+        return $this->hasMany(HotelImageModel::class, 'HotelId', 'HotelId');
+    }
 }
