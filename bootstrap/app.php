@@ -21,15 +21,19 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             if ($request->is('api/locationDistrict/*')) {
                 return response()->json([
-                    'message' => 'Không tìm thấy id của quận.'
+                    'message' => 'Không tìm thấy chi tiết quận.'
                 ], 404);
             } elseif ($request->is('api/locationCity/*')) {
                 return response()->json([
-                    'message' => 'Không tìm thấy id của thành phố.'
+                    'message' => 'Không tìm thấy chi tiết thành phố.'
                 ], 404);
             } elseif ($request->is('api/hotel/*')) {
                 return response()->json([
-                    'message' => 'Không tìm thấy id của khách sạn.'
+                    'message' => 'Không tìm thấy chi tiết khách sạn.'
+                ], 404);
+            } elseif ($request->is('api/hotelImg/*')) {
+                return response()->json([
+                    'message' => 'Không tìm thấy ảnh chi tiết của khách sạn.'
                 ], 404);
             }
         });

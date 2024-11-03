@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\HotelImageResource;
 use App\Models\HotelImageModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class HotelImageController extends Controller
@@ -92,9 +93,10 @@ class HotelImageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(HotelImageModel $hotelImg)
     {
         //
+        return new HotelImageResource($hotelImg);
     }
 
     /**
@@ -108,8 +110,21 @@ class HotelImageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(HotelImageModel $hotelImg)
     {
         //
+        $imgPath = $hotelImg->ImageUrl;
+
+        // dd($imgPath);
+
+        if (Storage::disk('public')->exists($imgPath)) {
+            Storage::disk('public')->delete($imgPath);
+        }
+
+        $hotelImg->delete();
+
+        return response()->json([
+            'message' => 'Ảnh đã được xoá thành công.'
+        ], 200);
     }
 }
