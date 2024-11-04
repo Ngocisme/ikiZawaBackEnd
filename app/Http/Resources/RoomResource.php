@@ -14,6 +14,22 @@ class RoomResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'Id' => $this->RoomId,
+            'Room Name' => $this->RoomName,
+            'Hotel Id' => $this->hotel ? $this->hotel->HotelName : null,
+            'Room Type' => $this->RoomType,
+            'Room Status' => $this->RoomStatus,
+            'Description' => $this->Description,
+            'Max Customer' => $this->MaxCustomer,
+            'Price' => $this->Price,
+            // 'Img Room' => $this->imageRoom->map(function ($img) {
+            //     return [
+            //         'Id ảnh' => $img->RoomImageId,
+            //         'Url ảnh' => $img->RoomUrl,
+            //         'Mô tả ảnh' => $img->RoomImageDescription,
+            //     ];
+            // })
+        ];
     }
 }

@@ -13,4 +13,9 @@ class LocationCityModel extends Model
         'locationCityId',
         'locationCityName'
     ];
+
+    public function district()
+    {
+        return $this->hasMany(LocationDistrictModel::class, 'locationCityId', 'locationCityId');
+    }
 }

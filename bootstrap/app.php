@@ -35,6 +35,14 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'message' => 'Không tìm thấy ảnh chi tiết của khách sạn.'
                 ], 404);
+            } elseif ($request->is('api/room/*')) {
+                return response()->json([
+                    'message' => 'Không tìm chi tiết phòng ở.'
+                ], 404);
+            } elseif ($request->is('api/roomImg/*')) {
+                return response()->json([
+                    'message' => 'Không tìm thấy ảnh chi tiết của phòng ở.'
+                ], 404);
             }
         });
     })->create();

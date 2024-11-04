@@ -22,6 +22,8 @@ Route::get('/user', function (Request $request) {
 // !! Lưu ý dùng lệnh php artisan route:list để check các phương thức GET,POST...
 // !! Lưu ý khi tạo dùng lệnh php artisan make:controller NameController --resource để render full các phương thức
 Route::apiResource('locationCity', LocationCityController::class);
+// ** Khúc này để truy xuất các quận trong thành phố đó
+Route::get('locationCity/{locationCityId}/locationDistrict', [LocationCityController::class, 'getDistrictByCity']);
 // ** Khúc này để lấy dữ liệu thành phố đã phân trang sẵn
 Route::get('/locationCityPage', [LocationCityController::class, 'getCitiesPage']);
 
@@ -38,6 +40,10 @@ Route::apiResource('hotelImg', HotelImageController::class);
 
 // ** Khúc này của bảng Room
 Route::apiResource('room', RoomController::class);
+
+
+
+
 
 // ** Khúc này của bảng booking
 Route::apiResource('booking', BookingController::class);

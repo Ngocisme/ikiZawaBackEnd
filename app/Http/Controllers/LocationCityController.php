@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LocationCityResource;
+use App\Http\Resources\LocationDistrictResource;
 use App\Models\LocationCityModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -163,5 +164,23 @@ class LocationCityController extends Controller
         return response()->json([
             'message' => 'Đã xoá thành công thành phố'
         ], 200);
+    }
+
+    public function getDistrictByCity($city)
+    {
+        $city = LocationCityModel::find($city);
+
+        if (!$city) {
+            return response()->json(
+                [
+                    'message' => 'Thành phố này không tồn tại'
+                ],
+                404
+            );
+        }
+
+        $district = $city->district;
+
+        return LocationDistrictResource::collection($district);
     }
 }
