@@ -8,6 +8,7 @@ use App\Http\Controllers\LocationDistrictController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,8 +42,8 @@ Route::apiResource('hotelImg', HotelImageController::class);
 // ** Khúc này của bảng Room
 Route::apiResource('room', RoomController::class);
 
-
-
+// ** Khúc này của bảng Room Img
+Route::apiResource('roomImg', RoomImageController::class);
 
 
 // ** Khúc này của bảng booking
