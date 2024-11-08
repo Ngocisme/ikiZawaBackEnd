@@ -19,4 +19,9 @@ class LocationDistrictModel extends Model
     {
         return $this->belongsTo(LocationCityModel::class, 'locationCityId', 'locationCityId');
     }
+
+    public function hotels()
+    {
+        return $this->hasMany(HotelModel::class, 'locationDistrictId');
+    }
 }

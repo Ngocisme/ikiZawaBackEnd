@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DistrictHotelsExport;
 use App\Http\Resources\LocationDistrictResource;
+use App\Models\HotelModel;
 use App\Models\LocationDistrictModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LocationDistrictController extends Controller
 {
@@ -145,5 +148,52 @@ class LocationDistrictController extends Controller
         return response()->json([
             'message' => 'Đã xoá thành công quận'
         ], 200);
+    }
+
+    public function countHotels($locationDistrictId)
+    {
+        $district = LocationDistrictModel::withCount('hotels')->find($locationDistrictId);
+
+        if (!$district) {
+            return response()->json([
+                'message' => 'Không tìm thấy quận này.'
+            ], 404);
+        }
+
+        if ($district->hotels_count === 0) {
+            return response()->json([
+                'message' => 'Không có khách sạn nào trong quận này.'
+            ], 200);
+        }
+
+        return response()->json([
+            'DistrictName' => $district->locationDistrictName,
+            'TotalHotels' => $district->hotels_count,
+            'Hotels' => $district->hotels->map(
+                function ($hotel) {
+                    return [
+                        'id' => $hotel->HotelId,
+                        'tên khách sạn' => $hotel->HotelName,
+                        'địa chỉ khách sạn' => $hotel->HotelAddress,
+                        'ngày mở cửa' => $hotel->OpenDay,
+                        'trạng thái' => $hotel->HotelStatus,
+                        'tên quận' => $hotel->district ? $hotel->district->locationDistrictName : null,
+                        'id quận' => $hotel->locationDistrictId,
+                    ];
+                }
+            )
+        ], 200);
+    }
+
+    public function exportDistrictHotels($locationDistrictId)
+    {
+        $hotelsCount = HotelModel::where('locationDistrictId', $locationDistrictId)->count();
+
+        if ($hotelsCount === 0) {
+            return response()->json([
+                'message' => 'Không có khách sạn nào trong quận này để xuất file.'
+            ], 404); // Trả về lỗi 404 hoặc thông báo tuỳ chọn
+        }
+        return Excel::download(new DistrictHotelsExport($locationDistrictId), 'district_hotels.xlsx');
     }
 }

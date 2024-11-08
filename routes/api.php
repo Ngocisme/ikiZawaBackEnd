@@ -31,7 +31,10 @@ Route::get('/locationCityPage', [LocationCityController::class, 'getCitiesPage']
 
 // ** Khúc này của bảng locationDistrict
 Route::apiResource('locationDistrict', LocationDistrictController::class);
-
+// ** Khúc này để lấy dữ liệu thống kê các khách sạn có trong thành phố đó
+Route::get('/locationDistrict/{locationDistrictId}/hotelCount', [LocationDistrictController::class, 'countHotels']);
+// ** Khúc này để xuất file excel về dự liệu các khách sạn có trong thành phố đó
+Route::get('/locationDistrict/{locationDistrictId}/exportDistrictHotels', [LocationDistrictController::class, 'exportDistrictHotels']);
 
 // ** Khúc này của bảng hotel
 Route::apiResource('hotel', HotelController::class);
