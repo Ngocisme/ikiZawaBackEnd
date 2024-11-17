@@ -5,10 +5,9 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\HotelImageController;
 use App\Http\Controllers\LocationCityController;
 use App\Http\Controllers\LocationDistrictController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomImageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +36,7 @@ Route::get('/locationDistrict/{locationDistrictId}/hotelCount', [LocationDistric
 Route::get('/locationDistrict/{locationDistrictId}/exportDistrictHotels', [LocationDistrictController::class, 'exportDistrictHotels']);
 
 // ** Khúc này của bảng hotel
-Route::apiResource('hotel', HotelController::class);
+Route::apiResource('hotels', HotelController::class);
 
 // ** Khúc này của bảng image hotel
 Route::apiResource('hotelImg', HotelImageController::class);
@@ -52,11 +51,11 @@ Route::apiResource('roomImg', RoomImageController::class);
 // ** Khúc này của bảng booking
 Route::apiResource('booking', BookingController::class);
 
-// ** Khúc này của bảng user login
-Route::apiResource('user/login', LoginController::class);
+// ** Khúc này của xử lí phía User
 
-// ** Khúc này của bảng user logout
-Route::apiResource('user/logout', LogoutController::class);
+Route::apiResource('user', UserController::class);
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
 
 // ** php artisan make:controller
 // ** php artisan make:model

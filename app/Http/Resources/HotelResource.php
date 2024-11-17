@@ -22,6 +22,7 @@ class HotelResource extends JsonResource
             'trạng thái' => $this->HotelStatus,
             'tên quận' => $this->district ? $this->district->locationDistrictName : null,
             'id quận' => $this->locationDistrictId,
+            'tên thành phố' =>  $this->district->city->locationCityName,
             'ảnh' => $this->imageHotel->map(function ($img) {
                 return [
                     'Id ảnh' => $img->HotelImageId,

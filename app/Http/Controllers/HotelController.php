@@ -15,7 +15,8 @@ class HotelController extends Controller
     public function index()
     {
         //
-        $hotels = HotelModel::with(['district', 'imageHotel'])->get();
+        $hotels = HotelModel::with(['district', 'imageHotel', 'district.city'])
+            ->get();
         if ($hotels->isNotEmpty()) {
             return HotelResource::collection($hotels);
         } else {

@@ -181,6 +181,15 @@ class LocationCityController extends Controller
 
         $district = $city->district;
 
+        if ($district->isEmpty()) {
+            return response()->json(
+                [
+                    'message' => 'Không có quận nào trong thành phố này'
+                ],
+                404
+            );
+        }
+
         return LocationDistrictResource::collection($district);
     }
 }
