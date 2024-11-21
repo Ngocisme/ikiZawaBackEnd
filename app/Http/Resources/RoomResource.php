@@ -23,13 +23,13 @@ class RoomResource extends JsonResource
             'Description' => $this->Description,
             'Max Customer' => $this->MaxCustomer,
             'Price' => $this->Price,
-            // 'Img Room' => $this->imageRoom->map(function ($img) {
-            //     return [
-            //         'Id ảnh' => $img->RoomImageId,
-            //         'Url ảnh' => $img->RoomUrl,
-            //         'Mô tả ảnh' => $img->RoomImageDescription,
-            //     ];
-            // })
+            'Img Room' => $this->imageRoom->map(function ($img) {
+                return [
+                    'Id ảnh' => $img->RoomImageId,
+                    'Url ảnh' => $img->RoomImageUrl,
+                    'Mô tả ảnh' => $img->RoomImageDescription,
+                ];
+            })
         ];
     }
 }

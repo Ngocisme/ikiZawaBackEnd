@@ -43,6 +43,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json([
                     'message' => 'Không tìm thấy ảnh chi tiết của phòng ở.'
                 ], 404);
+            } elseif ($request->is('api/comment/*')) {
+                return response()->json([
+                    'message' => 'Không tìm thấy chi tiết bình luận.'
+                ], 404);
             }
         });
     })->create();

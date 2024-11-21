@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\HotelImageController;
 use App\Http\Controllers\LocationCityController;
@@ -47,9 +48,9 @@ Route::apiResource('room', RoomController::class);
 // ** Khúc này của bảng Room Img
 Route::apiResource('roomImg', RoomImageController::class);
 
+// ** Khúc này của bảng Comment
+Route::apiResource('comment', CommentController::class);
 
-// ** Khúc này của bảng booking
-Route::apiResource('booking', BookingController::class);
 
 // ** Khúc này của xử lí phía User
 

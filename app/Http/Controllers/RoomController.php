@@ -15,7 +15,6 @@ class RoomController extends Controller
     public function index()
     {
         //
-        //
         $rooms = RoomModel::with(['hotel'])->get();
         if ($rooms->isNotEmpty()) {
             return RoomResource::collection($rooms);
@@ -32,7 +31,7 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, RoomModel $room)
+    public function store(Request $request)
     {
         //
         $validator = Validator::make(

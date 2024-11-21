@@ -29,7 +29,18 @@ class HotelResource extends JsonResource
                     'Url ảnh' => $img->ImageUrl,
                     'Mô tả ảnh' => $img->HotelImageDescription,
                 ];
-            })
+            }),
+            'Bình luận' => $this->commentHotel->map(function ($comment) {
+                return [
+                    'Id' => $comment->CommentId,
+                    'Tên khách sạn' => $comment->hotel->HotelName,
+                    'Tên khách hàng' => $comment->CustomerName,
+                    'Email' => $comment->Email,
+                    'Content' => $comment->Content,
+                    'Hiển thị' => $comment->Display,
+                    'Đánh giá' => $comment->Rating,
+                ];
+            }),
         ];
     }
 }

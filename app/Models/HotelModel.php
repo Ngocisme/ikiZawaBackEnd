@@ -31,4 +31,9 @@ class HotelModel extends Model
     {
         return $this->hasMany(HotelImageModel::class, 'HotelId', 'HotelId');
     }
+
+    public function commentHotel()
+    {
+        return $this->hasMany(CommentModel::class, 'HotelId', 'HotelId');
+    }
 }

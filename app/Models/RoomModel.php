@@ -24,8 +24,8 @@ class RoomModel extends Model
         return $this->belongsTo(HotelModel::class, 'HotelId', 'HotelId');
     }
 
-    // public function imageRoom()
-    // {
-    //     return $this->hasMany(HotelImageModel::class, 'HotelId', 'HotelId');
-    // }
+    public function imageRoom()
+    {
+        return $this->hasMany(RoomImageModel::class, 'RoomId', 'RoomId');
+    }
 }
